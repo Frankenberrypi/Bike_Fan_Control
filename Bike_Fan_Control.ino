@@ -16,8 +16,8 @@ int blue_state = 0;
 void setup() {
   myservo.attach(servo_pin);  // attaches the servo on pin 9 to the servo object
 
-  pinMode(red_pin, INPUT);
-  pinMode(blue_pin, INPUT);  
+  pinMode(red_pin, INPUT_PULLUP);
+  pinMode(blue_pin, INPUT_PULLUP);  
 
   pinMode(ledPin, OUTPUT);
 }
@@ -26,20 +26,20 @@ void loop() {
   red_state = digitalRead(red_pin);
   blue_state = digitalRead(blue_pin);
 
-  if(red_state == HIGH){
+  if(blue_state == LOW){
     digitalWrite(ledPin, HIGH);
   }else{
     digitalWrite(ledPin, LOW);
   }
 
-  if (red_state == HIGH){
+  if (red_state == LOW){
     if(pos<180){
       pos += 1;
       myservo.write(pos);
     }
     delay(100);
   }
-  if(blue_state == HIGH){
+  if(blue_state == LOW){
     if(pos > 0){
       pos -=1;
       myservo.write(pos);
