@@ -6,44 +6,37 @@ Servo myservo;  // create servo object to control a servo
 int pos = 90;    // variable to store the servo position
 
 const int servo_pin = 9;
-const int red_pin = 2;  // red button
+const int green_pin = 2;  // red button
 const int blue_pin = 3; // blue button
 const int ledPin = 13;
 
-int red_state = 0;
+int green_state = 0;
 int blue_state = 0;
 
 void setup() {
   myservo.attach(servo_pin);  // attaches the servo on pin 9 to the servo object
 
-  pinMode(red_pin, INPUT_PULLUP);
+  pinMode(green_pin, INPUT_PULLUP);
   pinMode(blue_pin, INPUT_PULLUP);  
 
-  pinMode(ledPin, OUTPUT);
 }
 
 void loop() {
-  red_state = digitalRead(red_pin);
+  green_state = digitalRead(green_pin);
   blue_state = digitalRead(blue_pin);
 
-  if(blue_state == LOW){
-    digitalWrite(ledPin, HIGH);
-  }else{
-    digitalWrite(ledPin, LOW);
-  }
-
-  if (red_state == LOW){
+  if (green_state == LOW){
     if(pos<180){
-      pos += 1;
+      pos += 2;
       myservo.write(pos);
     }
-    delay(100);
+    delay(15);
   }
   if(blue_state == LOW){
-    if(pos > 0){
-      pos -=1;
+    if(pos > 6){
+      pos -= 2;
       myservo.write(pos);
     }
-    delay(100);
+    delay(15);
   }
 }
